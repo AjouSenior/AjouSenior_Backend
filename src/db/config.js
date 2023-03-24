@@ -1,12 +1,13 @@
 import mongoose from "mongoose"
 import dotenv from 'dotenv';
-import book from "../model/book.js"
 
 dotenv.config();
 const uri = process.env.MONGO_URI
 
 const connect = () =>{
-    mongoose.connect(uri)
+    mongoose.connect(uri,{
+        dbName : "AjouSenior"
+    })
     .then(() => {
         console.log('MongoDB conected')
     }
