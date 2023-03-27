@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import Community from '../model/community.js';
+import hope from '../model/hope.js';
 
 const router = Router();
 
@@ -27,4 +28,22 @@ router.get('/community/readall',function(req,res){
         res.json(200)
     })
 })
+router.post('/talentdonation/upload', function(req, res){
+    const seniorcenter = req.body.seniorcenter;
+    const writer = req.body.writer;
+    const date = req.body.date;
+    const content = req.body.content
+    const needpeople = req.body.daneedpeoplete
+    const talentdonation = new hope({
+        seniorcenter : seniorcenter,
+        writer : writer,
+        date : date,
+        content : content,
+        needpeople : needpeople,
+    });
+    talentdonation.save().then(() => 
+        console.log('Saved successfully'),
+        res.json(200)
+        );
+});
 export default router
