@@ -22,13 +22,9 @@ router.post('/community/upload', function(req, res){
         );
 });
 router.get('/community/readall',function(req,res){
-    const readall = Community.find()
-    if (readall){
+    Community.find().then(function(obj){
+        console.log(obj)
         res.json(200)
-        console.log(readall)
-    }
-    else{
-        res.json(500)
-    }
+    })
 })
 export default router
