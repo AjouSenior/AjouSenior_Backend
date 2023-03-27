@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const {Schema} = mongoose;
 
-const hopeSchema = new Schema({
+const talentdonationSchema = new Schema({
     seniorcenter :{
         type : String
     },
@@ -19,4 +19,4 @@ const hopeSchema = new Schema({
     }
 });
 
-export default mongoose.model('Hope', hopeSchema,"Hope");
+export default mongoose.model('Talentdonation', talentdonationSchema,"Talentdonation");
