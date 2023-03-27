@@ -45,4 +45,10 @@ router.post('/talentdonation/upload', function(req, res){
         res.json(200)
         );
 });
+router.get('/talentdonation/readall',function(req,res){
+    Talentdonation.find().then(function(obj){
+        console.log(obj)
+        res.json(200)
+    })
+})
 export default router
