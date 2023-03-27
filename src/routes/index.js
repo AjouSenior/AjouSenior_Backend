@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import Community from '../model/community.js';
-import hope from '../model/hope.js';
-
+import Talentdonation from "../model/talentdonation.js"
 const router = Router();
 
 router.post('/community/upload', function(req, res){
@@ -34,7 +33,7 @@ router.post('/talentdonation/upload', function(req, res){
     const date = req.body.date;
     const content = req.body.content
     const needpeople = req.body.daneedpeoplete
-    const talentdonation = new hope({
+    const talentdonation = new Talentdonation({
         seniorcenter : seniorcenter,
         writer : writer,
         date : date,
