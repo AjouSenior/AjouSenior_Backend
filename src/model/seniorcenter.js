@@ -2,18 +2,6 @@ import mongoose from 'mongoose';
 const {Schema} = mongoose;
 
 const seniorcenterSchema = new Schema({
-
-// _id
-// SIGUN_NM
-// BIZPLC_NM
-// LICENSG_DE
-// BSN_STATE_NM
-// ENTRNC_FNOP
-// REFINE_ROADNM_ADDR
-// REFINE_LOTNO_ADDR
-// REFINE_ZIPNO
-// REFINE_WGS84_LAT
-// REFINE_WGS84_LOGT
     _id :{
         type : String
     },
