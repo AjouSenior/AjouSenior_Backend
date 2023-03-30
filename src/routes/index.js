@@ -47,7 +47,10 @@ router.post('/community/upload', function(req, res){
 router.get('/community/readall',function(req,res){
     Community.find().then(function(obj){
         console.log(obj)
-        res.json(200)
+        res.json({
+            type : true,
+            data : obj  
+          })
     })
 })
 router.post('/talentdonation/upload', function(req, res){
@@ -71,13 +74,19 @@ router.post('/talentdonation/upload', function(req, res){
 router.get('/talentdonation/readall',function(req,res){
     Talentdonation.find().then(function(obj){
         console.log(obj)
-        res.json(200)
+        res.json({
+            type : true,
+            data : obj  
+          })
     })
 })
 router.get('/seniorcenter/readall',function(req,res){
     SeniorCenter.find().then(function(obj){
         console.log(obj)
-        res.json(200)
+        res.json({
+          type : true,
+          data : obj  
+        })
     })
 })
 export default router
