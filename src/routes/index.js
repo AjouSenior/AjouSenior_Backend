@@ -91,6 +91,7 @@ router.get('/seniorcenter/readall',function(req,res){
 })
 router.post('/seniorcenter/findseniorcenter',function(req,res){
     const findname = req.body.findname
+    console.log(req.body)
     SeniorCenter.find({"BIZPLC_NM":{"$regex":`${findname}`}}).then(function(obj){
         console.log(obj)
         res.json({
