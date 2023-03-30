@@ -2,6 +2,7 @@ import { Router } from 'express';
 import Community from '../model/community.js';
 import Talentdonation from "../model/talentdonation.js"
 import User from "../model/user.js"
+import SeniorCenter from "../model/seniorcenter.js"
 const router = Router();
 
 router.post('/user/signup',function(req,res){
@@ -69,6 +70,12 @@ router.post('/talentdonation/upload', function(req, res){
 });
 router.get('/talentdonation/readall',function(req,res){
     Talentdonation.find().then(function(obj){
+        console.log(obj)
+        res.json(200)
+    })
+})
+router.get('/seniorcenter/readall',function(req,res){
+    SeniorCenter.find().then(function(obj){
         console.log(obj)
         res.json(200)
     })

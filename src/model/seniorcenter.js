@@ -37,4 +37,4 @@ const seniorcenterSchema = new Schema({
     }
 });
 
-export default mongoose.model('Seniorcenter', seniorcenterSchema,"Seniorcenter");
+export default mongoose.model('SeniorCenter', seniorcenterSchema,"SeniorCenter");
