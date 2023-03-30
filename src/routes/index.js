@@ -1,7 +1,27 @@
 import { Router } from 'express';
 import Community from '../model/community.js';
 import Talentdonation from "../model/talentdonation.js"
+import User from "../model/user.js"
 const router = Router();
+
+router.post('/user/signup',function(req,res){
+    const profile_nickname = req.body.profile_nickname;
+    const account_email = req.body.account_email;
+    const gender = req.body.gender;
+    const age_range = req.body.age_range
+    const birthday = req.body.birthday
+    const user = new User({
+        profile_nickname : profile_nickname,
+        account_email : account_email,
+        gender : gender,
+        age_range : age_range,
+        birthday : birthday
+    });
+    user.save().then(() => 
+        console.log('Saved successfully'),
+        res.json(200)
+        );
+})
 
 router.post('/community/upload', function(req, res){
     const title = req.body.title;
