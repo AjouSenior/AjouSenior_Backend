@@ -9,12 +9,14 @@ router.post('/user/signup',function(req,res){
     const account_email = req.body.account_email;
     const gender = req.body.gender;
     const age_range = req.body.age_range
+    const seniorcenter = req.body.seniorcenter
     const birthday = req.body.birthday
     const user = new User({
         profile_nickname : profile_nickname,
         account_email : account_email,
         gender : gender,
         age_range : age_range,
+        seniorcenter: seniorcenter,
         birthday : birthday
     });
     user.save().then(() => 

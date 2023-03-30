@@ -14,6 +14,9 @@ const userSchema = new Schema({
     age_range : {
         type: String
     },
+    seniorcenter : {
+        type: String
+    },
     birthday : {
         type : Date
     }
