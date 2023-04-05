@@ -3,6 +3,7 @@ import Community from '../model/community.js';
 import Talentdonation from "../model/talentdonation.js"
 import User from "../model/user.js"
 import SeniorCenter from "../model/seniorcenter.js"
+import Talentdonationhope from "../model/talentdonationhope.js"
 const router = Router();
 
 router.post('/user/signup',function(req,res){
@@ -58,13 +59,14 @@ router.post('/talentdonation/upload', function(req, res){
     const writer = req.body.writer;
     const date = req.body.date;
     const content = req.body.content
-    const needpeople = req.body.daneedpeoplete
+    const maxpeople = req.body.maxpeople
     const talentdonation = new Talentdonation({
         seniorcenter : seniorcenter,
         writer : writer,
         date : date,
         content : content,
-        needpeople : needpeople,
+        maxpeople : maxpeople,
+        currentpeople : 0
     });
     talentdonation.save().then(() => 
         console.log('Saved successfully'),
@@ -79,6 +81,32 @@ router.get('/talentdonation/readall',function(req,res){
             data : obj  
           })
     })
+})
+router.post('/talentdonation/findone',function(req,res){
+    const donationid = req.body.donationid
+    const findDonation = {
+        _id : donationid
+    }
+    Talentdonation.findOne(findDonation).then(function(obj){
+        res.json({
+            type : true,
+            data : obj
+        })
+    })
+})
+router.post('/talentdonation/hope', function(req,res){  //프론트 단에서 maxpeople과 currentpeople 비교 작업 필요
+    const donationid = req.body.donationid
+    const userid = req.body.userid
+    const currentpeople = req.body.currentpeople
+    const talentdonationhope = new Talentdonationhope({
+        donationId : donationid,
+        userId : userid
+    })
+    Talentdonation.updateOne({$set : {currentpeople:currentpeople+1}}).exec()
+    talentdonationhope.save().then(() => 
+        console.log('Saved successfully'),
+        res.json(200)
+    );
 })
 router.get('/seniorcenter/readall',function(req,res){
     SeniorCenter.find().then(function(obj){

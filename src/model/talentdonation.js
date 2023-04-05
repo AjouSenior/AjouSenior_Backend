@@ -14,7 +14,16 @@ const talentdonationSchema = new Schema({
     content : {
         type: String
     },
-    needpeople : {
+    maxpeople : {
+        type : Number
+    },
+    currentpeople : {
+        type : Number
+    },
+    latitude : {
+        type : String
+    },
+    longitude : {
         type : String
     }
 });
