@@ -55,23 +55,41 @@ router.get('/community/readall',function(req,res){
     })
 })
 router.post('/talentdonation/upload', function(req, res){
-    const seniorcenter = req.body.seniorcenter;
-    const writer = req.body.writer;
-    const date = req.body.date;
-    const content = req.body.content
-    const maxpeople = req.body.maxpeople
-    const talentdonation = new Talentdonation({
-        seniorcenter : seniorcenter,
-        writer : writer,
-        date : date,
-        content : content,
-        maxpeople : maxpeople,
-        currentpeople : 0
-    });
-    talentdonation.save().then(() => 
-        console.log('Saved successfully'),
-        res.json(200)
-        );
+    const seniorcenter = req.body.seniorcenter
+    const findSeniorcenter = {
+        BIZPLC_NM : seniorcenter
+    }
+    console.log(req.body.seniorcenter)
+    SeniorCenter.findOne(findSeniorcenter).then(function(obj){
+        if (obj == null) {
+            res.json({
+                type : true,
+                data : "경로당의 위치를 확인할 수 없습니다"  
+              })
+        }
+        else{
+            const writer = req.body.writer;
+            const date = req.body.date;
+            const content = req.body.content
+            const maxpeople = req.body.maxpeople
+            const latitude = obj.REFINE_WGS84_LAT
+            const longitude = obj.REFINE_WGS84_LOGT
+            const talentdonation = new Talentdonation({
+                seniorcenter : seniorcenter,
+                writer : writer,
+                date : date,
+                content : content,
+                maxpeople : maxpeople,
+                currentpeople : 0,
+                latitude : latitude,
+                longitude : longitude
+            });
+            talentdonation.save().then(() => 
+                console.log('Saved successfully'),
+                res.json(200)
+                );
+            }
+        })
 });
 router.get('/talentdonation/readall',function(req,res){
     Talentdonation.find().then(function(obj){
