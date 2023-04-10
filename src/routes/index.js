@@ -21,10 +21,12 @@ router.post('/user/signup',function(req,res){
         seniorcenter: seniorcenter,
         birthday : birthday
     });
-    user.save().then(() => 
-        console.log('Saved successfully'),
-        res.json(200)
-        );
+    user.save().then(function(obj){
+        res.json({
+            type : true,
+            data : obj
+        })
+    })
 })
 
 router.post('/community/upload', function(req, res){
