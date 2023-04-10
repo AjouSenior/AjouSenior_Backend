@@ -145,4 +145,29 @@ router.post('/seniorcenter/findseniorcenter',function(req,res){
         })
     })
 })
+
+router.post('/junior/findtalentdonationhope',function(req,res){
+    const userId = req.body.userId
+    const findTalentdonationhpoe = {
+        userId : userId
+    }
+    const donationList = [] 
+    Talentdonationhope.find(findTalentdonationhpoe).then(function(obj){
+        for (const data of obj){
+            console.log(data)
+        }
+        // Promise.all(
+        // obj.map((v)=> {
+        //     Talentdonation.find({_id : v.donationId}).then(function(obj){
+        //         donationList.push(obj)
+        //         })
+        //     })
+        // )
+        res.json({
+            type : true,
+            data : donationList
+        })
+    })
+   
+})
 export default router
