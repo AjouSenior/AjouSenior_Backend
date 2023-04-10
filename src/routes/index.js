@@ -153,23 +153,24 @@ router.post('/junior/findtalentdonationhope',function(req,res){
     const findTalentdonationhpoe = {
         userId : userId
     }
-    const donationList = [] 
+    
     Talentdonationhope.find(findTalentdonationhpoe).then(function(obj){
-        for (const data of obj){
-            console.log(data)
-        }
-        // Promise.all(
-        // obj.map((v)=> {
-        //     Talentdonation.find({_id : v.donationId}).then(function(obj){
-        //         donationList.push(obj)
-        //         })
-        //     })
-        // )
-        res.json({
-            type : true,
-            data : donationList
+        const results = []
+        let count = 0
+        obj.forEach((element, index) =>{
+            Talentdonation.find({_id : element.donationId}).then(function(result){
+                results[index] = result
+                count++
+                if (count === obj.length){
+                    res.json({
+                        type :true,
+                        data : results
+                    })
+                }
+            })
+        })
+            
         })
     })
-   
-})
+
 export default router
