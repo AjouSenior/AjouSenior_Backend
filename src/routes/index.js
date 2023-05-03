@@ -173,4 +173,28 @@ router.post('/junior/findtalentdonationhope',function(req,res){
         })
     })
 
+router.post('/senior/findtalentdonationhope',function(req,res){
+    const donationid = req.body.donationid
+    const findDonation = {
+        donationId : donationid
+    }
+    Talentdonationhope.find(findDonation).then(function(obj){
+        const results = []
+        let count = 0
+        obj.forEach((element, index) =>{
+            User.find({_id : element.userId}).then(function(result){
+                results[index] = result
+                count++
+                if (count === obj.length){
+                    res.json({
+                        type :true,
+                        data : results
+                    })
+                }
+            })
+        })
+    })
+})
+    
+
 export default router
