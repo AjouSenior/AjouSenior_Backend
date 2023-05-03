@@ -5,7 +5,7 @@ import User from "../model/user.js"
 import SeniorCenter from "../model/seniorcenter.js"
 import Talentdonationhope from "../model/talentdonationhope.js"
 const router = Router();
-
+var today = new Date()
 router.post('/user/signup',function(req,res){
     const profile_nickname = req.body.profile_nickname;
     const account_email = req.body.account_email;
