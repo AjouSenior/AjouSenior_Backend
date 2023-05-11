@@ -84,7 +84,7 @@ router.post('/talentdonation/upload', function(req, res){
                 maxpeople : maxpeople,
                 currentpeople : 0,
                 latitude : latitude,
-                longitude : longitude
+                longitude : longitude,
             });
             talentdonation.save().then(() => 
                 console.log('Saved successfully'),
@@ -192,6 +192,18 @@ router.post('/senior/findtalentdonationhope',function(req,res){
                     })
                 }
             })
+        })
+    })
+})
+router.post('/senior/mytalentdonation', function(req, res){
+    const username = req.body.username
+    const finduser = {
+        writer : username
+    }
+    Talentdonation.find(finduser).then(function(obj){
+        res.json({
+            type : true,
+            data : obj
         })
     })
 })
