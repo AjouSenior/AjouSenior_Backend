@@ -95,11 +95,14 @@ router.post('/talentdonation/upload', function(req, res){
 });
 router.get('/talentdonation/readall',function(req,res){
     Talentdonation.find().then(function(obj){
-        console.log(obj)
+        const filterData = obj.filter((item)=> {
+            const itemDate = new Date(item.date)
+            return itemDate > today
+        })
         res.json({
             type : true,
-            data : obj  
-          })
+            data : filterData
+        })
     })
 })
 router.post('/talentdonation/findone',function(req,res){
@@ -201,12 +204,32 @@ router.post('/senior/mytalentdonation', function(req, res){
         writer : username
     }
     Talentdonation.find(finduser).then(function(obj){
+        const filterData = obj.filter((item)=> {
+            const itemDate = new Date(item.date)
+            return itemDate > today
+        })
         res.json({
             type : true,
-            data : obj
+            data : filterData
         })
     })
 })
     
-
+router.post('/senior/mylastdatedonation', function(req,res){
+    const today = new Date();
+    const username = req.body.username
+    const finduser = {
+        writer : username
+    }
+    Talentdonation.find(finduser).then(function(obj){
+        const filterData = obj.filter((item)=> {
+            const itemDate = new Date(item.date)
+            return itemDate < today
+        })
+        res.json({
+            type : true,
+            data : filterData
+        })
+    })
+})
 export default router
