@@ -120,12 +120,12 @@ router.post('/talentdonation/findone',function(req,res){
 router.post('/talentdonation/hope', function(req,res){  //프론트 단에서 maxpeople과 currentpeople 비교 작업 필요
     const donationid = req.body.donationid
     const userid = req.body.userid
-    const currentpeople = req.body.currentpeople
+    const currentpeople = parseInt(req.body.currentpeople)
     const talentdonationhope = new Talentdonationhope({
         donationId : donationid,
         userId : userid
     })
-    Talentdonation.updateOne({$set : {currentpeople:currentpeople+1}}).exec()
+    Talentdonation.updateOne({_id:donationid},{$set : {currentpeople:currentpeople+1}}).exec()
     talentdonationhope.save().then(() => 
         console.log('Saved successfully'),
         res.json(200)
