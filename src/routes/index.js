@@ -247,4 +247,40 @@ router.post('/senior/talentdonationconfirm', function(req,res){
         })
     })
 })
+
+router.post('/junior/confirmfindtalentdonationhope',function(req,res){
+    const userId = req.body.userId
+    const findTalentdonationhpoe = {
+        userId : userId
+    }
+    
+    Talentdonationhope.find(findTalentdonationhpoe).then(function(obj){
+        const results = []
+        let count = 0
+        obj.forEach((element, index) =>{
+            if(element.status == true){
+                Talentdonation.find({_id : element.donationId}).then(function(result){
+                    results.push(result)
+                    count++
+                    if (count === obj.length){
+                        res.json({
+                            type :true,
+                            data : results
+                        })
+                    }
+                })
+            }
+            else{
+                count++
+                if (count === obj.length){
+                    res.json({
+                        type :true,
+                        data : results
+                    })
+                }
+            }
+        })
+            
+        })
+    })
 export default router
