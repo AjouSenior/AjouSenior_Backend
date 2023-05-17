@@ -7,6 +7,9 @@ const talentdonationhopeSchema = new Schema({
     },
     userId : {
         type : Object
+    },
+    status : {
+        type : Boolean
     }
 });
 
