@@ -232,4 +232,19 @@ router.post('/senior/mylastdatedonation', function(req,res){
         })
     })
 })
+
+router.post('/senior/talentdonationconfirm', function(req,res){
+    const donationid = req.body.donationid
+    const userid = req.body.userid
+    const findtalentdonationhope = {
+        donationId : donationid,
+        userId : userid,
+    }
+    Talentdonationhope.updateOne(findtalentdonationhope, { $set: { status: true } }, { upsert: true }).then(function(result){
+        res.json({
+            type : true,
+            data : result
+        })
+    })
+})
 export default router
